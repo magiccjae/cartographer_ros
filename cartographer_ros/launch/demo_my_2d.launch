@@ -1,5 +1,5 @@
 <!--
-  Copyright 2018 The Cartographer Authors
+  Copyright 2016 The Cartographer Authors
 
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -17,23 +17,10 @@
 <launch>
   <param name="/use_sim_time" value="true" />
 
-  <param name="robot_description"
-    textfile="$(find cartographer_ros)/urdf/backpack_2d.urdf" />
+  <include file="$(find cartographer_ros)/launch/my_2d.launch" />
 
-  <node name="robot_state_publisher" pkg="robot_state_publisher"
-    type="robot_state_publisher" />
-
-  <node name="cartographer_grpc_node" pkg="cartographer_ros"
-      type="cartographer_grpc_node" args="
-          -configuration_directory $(find cartographer_ros)/configuration_files
-          -configuration_basename backpack_2d.lua
-          -map_filename $(arg map_filename)"
-      output="screen">
-    <remap from="echoes" to="horizontal_laser_2d" />
-  </node>
-
-  <node name="playbag" pkg="rosbag" type="play"
-        args="--clock $(arg bag_filename)" />
   <node name="rviz" pkg="rviz" type="rviz" required="true"
       args="-d $(find cartographer_ros)/configuration_files/demo_2d.rviz" />
+  <node name="playbag" pkg="rosbag" type="play"
+      args="--clock $(arg bag_filename)" />
 </launch>
