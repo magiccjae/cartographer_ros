@@ -45,5 +45,13 @@ options = {
 MAP_BUILDER.use_trajectory_builder_2d = true
 TRAJECTORY_BUILDER_2D.num_accumulated_range_data = 1
 TRAJECTORY_BUILDER_2D.use_imu_data = false
+TRAJECTORY_BUILDER_2D.min_range = 1
+TRAJECTORY_BUILDER_2D.max_range = 100
+TRAJECTORY_BUILDER_2D.use_online_correlative_scan_matching = true
+-- TRAJECTORY_BUILDER_2D.voxel_filter_size = 0.01
+-- POSE_GRAPH.constraint_builder.min_score = 0.8
+
+-- TRAJECTORY_BUILDER_2D.real_time_correlative_scan_matcher.linear_search_window = 0.1
+TRAJECTORY_BUILDER_2D.real_time_correlative_scan_matcher.angular_search_window = math.rad(20.)
 
 return options
